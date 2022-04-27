@@ -83,3 +83,52 @@ O Mongo vai adicionar sozinho uma primary key "_id" diferente em cada documento 
         {...condition key/value}, 
         {$set: {...new values}}
     )
+
+## Fazendo Query nas Collections
+
+- Pegando todos os docs de uma collection
+    *db.[collection_name].find()*
+    *db.[collection_name].find().pretty()* => deixar mais apresentável
+
+- Pegando o primeiro doc da collection
+    *db.[collection_name].findOne()*
+
+- Pegando docs segundo condições
+    *db.[collection_name].find({key:value conditions})*
+
+- Pegar 1 doc e trocar/deletar ele
+    *db.[collection_name].findOneAndReplace({key:value cond}, <replacement>)*
+    *db.[collection_name].findOneAndDelete({key:value cond})*
+
+## Deletando Documents das Collections
+
+- Deletando **UM** documento
+    *db.[collection_name].deleteOne({..conditions})*
+    *db.[collection_name].remove({..conditions}, { justOne: true })*
+
+- Deletando **VÁRIOS** documentos
+    *db.[collection_name].deleteMany({..conditions})*
+    *db.[collection_name].remove({..conditions}, { justOne: false })*
+
+## Queries mais Complexas com Op. Lógicos
+
+- *$Eq* => Equal
+- *$lt* => less than
+- *$lte* => less than equal
+- *$gt* => greater than
+- *$gte* => greater than equal
+- *$and* e *$or* => recebem um array com queries: [{}, {}]
+
+    *db.[collection_name].find({ key: { $op: value } })*
+
+ex:
+    1. Pegar pessoas com renda maior ou igual a 10.000 por mes
+        *db.people.find({ salary: { $gte: 10000 } })*
+    2. Pessoas com idade maior que 18 e grau ocular menor que 2
+        *db.people.find({ age: { $gte: 18 }, degree: { $lt: 2 } })*
+        2.1. Usando com **$and**
+            db.people.find({
+                $and: [ { age: { $gte: 18 } }, { degree: { $lt: 2 } } ]
+            })
+
+## Retrieving Specific Fields
