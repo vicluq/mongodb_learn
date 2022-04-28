@@ -1,6 +1,6 @@
-echo $1
-echo $2
-echo $3
+echo "COMMIT MSG: $1"
+echo "REMOTE: $2"
+echo "BRANCH: $3"
 
 git add .
 git commit -m "$1" # COMMIT MSG
