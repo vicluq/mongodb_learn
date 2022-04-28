@@ -132,3 +132,14 @@ ex:
             })
 
 ## Retrieving Specific Fields
+
+No objeto de opções nós passamos os campos que queremos ocultar ou exibir
+- "field": 0/1 => 0 desabilita, 1 habilita
+
+Ex:
+- Pegando apenas name e _id: *db.users.find({conditon_fields}, { "_id": 1, "name": 1 });*
+- Excluindo apenas permission: *db.users.find({conditon_fields}, { permission: 0 });*
+- Excluindo idade e pegando quem tem permissao maior que 1: *db.users.find({ permission: { $gt: 1 } }, { age: 0 });*
+
+OBS: quando configuro a incluisãp como acima, já está dito ao mongo que só quero aqueles,
+logo, não preciso excluir os outros (redundante). Para excluir, a mesma coisa.
