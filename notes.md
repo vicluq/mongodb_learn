@@ -122,11 +122,11 @@ O Mongo vai adicionar sozinho uma primary key "_id" diferente em cada documento 
     *db.[collection_name].find({ key: { $op: value } })*
 
 ex:
-    1. Pegar pessoas com renda maior ou igual a 10.000 por mes
-        *db.people.find({ salary: { $gte: 10000 } })*
-    2. Pessoas com idade maior que 18 e grau ocular menor que 2
-        *db.people.find({ age: { $gte: 18 }, degree: { $lt: 2 } })*
-        2.1. Usando com **$and**
+    - Pegar pessoas com renda maior ou igual a 10.000 por mes
+        - *db.people.find({ salary: { $gte: 10000 } })*
+    - Pessoas com idade maior que 18 e grau ocular menor que 2
+        - *db.people.find({ age: { $gte: 18 }, degree: { $lt: 2 } })*
+        - Usando com **$and**
             db.people.find({
                 $and: [ { age: { $gte: 18 } }, { degree: { $lt: 2 } } ]
             })

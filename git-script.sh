@@ -1,3 +1,5 @@
+# Bash script for committing and pushing to remotes
+
 echo "COMMIT MSG: $1"
 echo "REMOTE: $2"
 echo "BRANCH: $3"
