@@ -143,3 +143,53 @@ Ex:
 
 OBS: quando configuro a incluisãp como acima, já está dito ao mongo que só quero aqueles,
 logo, não preciso excluir os outros (redundante). Para excluir, a mesma coisa.
+
+## Aggregation
+
+- Podemos fazer um pipeline de operações e estágios, de forma a obter os dados finais resultantes desses estágio
+
+- o pipeline é um array com operações
+
+- *db.[collection].aggregate(pipeline, {options})*
+
+- **Pipeline**
+    - [ {estagio1}, {estagio2},..., {estagioN} ]
+
+- **Operações**
+    - $sort => faz o sort pelos atributos que tão com valor = 1 (cresc) e -1 (decres)
+        db.users.aggregate([ { $sort: { age: 1 } } ])
+    - $limit => A quantia de elementos que queremos retornar
+        db.users.aggregate([ { $limit: 5 } ])
+    - pesquisar mais
+
+- Podemos criar variáveis com a keyword "var"
+    var pipeline = [{...}];
+    db.users.aggregate(pipeline, {...});
+
+## Methods
+
+- db.collection.find().sort({...});
+- db.collection.find().limit(num);
+- db.collection.find().skip(num); => vai pular os X primeiros
+
+OBS: skip e limit juntos nos permite aplicar paginação
+
+## Criando Indexes
+
+São úteis para diminuir o tempo de pegar dados na DB, principalmente quando temos
+grandes quantidades de documentos.
+
+- db.[collection].createIndex({ key: 1 (pra botar) / 0 (pra tirar) })
+
+## Back up de Dados
+
+1. Criar uma pasta para salvar
+2. Rodar o comando mongodump.exe --out [dir] (se não especificarm, cai em uma pasta ./dumb padrão) (através do diretório do DB tools)
+3. Verificar se foi certo
+
+Para restaurar:
+- Rodar o mongorestore.exe
+    - Por padrão pega da ./dump
+    - Mas, especificaremos o path do backup caso tenhamos um
+
+Precisamos fazer download do databasetools para ter acesso ao mongodump
